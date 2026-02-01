@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Yay!</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Indie+Flower&family=Inter:wght@400;600;800&display=swap"
+    rel="stylesheet">
+  <style>
+    .header-text {
+      color: #ff4d6d;
+      font-size: 4rem;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <div id="content">
+      <h1 class="header-text">Sabi ko na yes magiging sagot mo! ❤️</h1>
+      <div class="gif-container">
+        <img src="https://www.desiglitters.com/wp-content/uploads/2017/04/Nice-Glitter-Of-Powerpuff-Girls.gif"
+          alt="Powerpuff Girls">
+      </div>
+    </div>
+  </div>
+
+  <audio id="bg-music">
+    <source src="music.mp3" type="audio/mpeg">
+    Your browser does not support the audio element.
+  </audio>
+
+  <script>
+    // Try to play audio automatically
+    document.addEventListener('DOMContentLoaded', function () {
+      const audio = document.getElementById("bg-music");
+      audio.volume = 0.5; // Start at 50% volume
+
+      // Stop after 35 seconds
+      audio.addEventListener('timeupdate', function () {
+        if (this.currentTime >= 36) {
+          this.pause();
+        }
+      });
+
+      audio.play().catch(error => {
+        console.log("Autoplay failed - user interaction needed", error);
+        // Fallback: Play on first click anywhere on the page
+        document.body.addEventListener('click', () => {
+          audio.play();
+        }, { once: true });
+      });
+    });
+  </script>
+
+  <script>
+    // Simple confetti effect
+    function createHeart() {
+      const heart = document.createElement('div');
+      heart.classList.add('heart');
+
+      const symbols = ['❤️', '✨', '💖', '💕', '✨']; // Mix of hearts and sparkles
+      heart.innerHTML = symbols[Math.floor(Math.random() * symbols.length)];
+
+      heart.style.left = Math.random() * 100 + 'vw';
+      heart.style.animationDuration = Math.random() * 2 + 3 + 's';
+      heart.style.fontSize = Math.random() * 20 + 10 + 'px';
+
+      // Random rotation
+      heart.style.transform = `rotate(${Math.random() * 360}deg)`;
+
+      document.body.appendChild(heart);
+
+      setTimeout(() => {
+        heart.remove();
+      }, 5000);
+    }
+
+    setInterval(createHeart, 100); // Faster spawn for more glitter!
+  </script>
+  <style>
+    .heart {
+      position: fixed;
+      top: -20px;
+      font-size: 20px;
+      animation: fall linear forwards;
+      z-index: 999;
+      filter: drop-shadow(0 0 5px rgba(255, 255, 255, 0.8));
+      /* Glow effect */
+    }
+  </style>
+</body>
+
+</html>
